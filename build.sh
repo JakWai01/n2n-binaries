@@ -9,7 +9,7 @@ cd /tmp
 tar -zxvf 2.8.tar.gz
 cd n2n-2.8
 dnf install @development-tools
-dnf install autoconf automake autogen
+dnf install autoconf automake autogen libtools
 ./autogen.sh
 ./configure
 make
