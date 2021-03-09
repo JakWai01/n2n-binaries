@@ -13,3 +13,4 @@ sudo dnf install -y autoconf automake
 ./autogen.sh
 ./configure
 make
+make install
