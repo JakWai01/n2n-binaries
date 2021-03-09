@@ -20,15 +20,10 @@ jobs:
           - name: Build builder for amd64 and arm64
             run: |
               docker buildx build --output "type=docker,push=false,name=jakwai01/n2n-binary-builder-amd64:latest,dest=/tmp/n2n-binary-builder-amd64.tar" --platform linux/amd64 .
-              docker buildx build --output "type=docker,push=false,name=jakwai01/n2n-binary-builder-arm64:latest,dest=/tmp/n2n-binary-builder-arm64.tar" --platform linux/arm64 .
           - name: Build for amd64
             run: |
               docker load -i /tmp/n2n-binary-builder-amd64.tar
               docker run --name n2n-binary-builder-amd64 -v ${PWD}:/data:z jakwai01/n2n-binary-builder-amd64:latest
-          - name: Build for arm64
-            run: |
-              docker load -i /tmp/n2n-binary-builder-arm64.tar
-              docker run --name n2n-binary-builder-arm64 -v ${PWD}:/data:z jakwai01/n2n-binary-builder-arm64:latest
           - name: Publish binaries to GitHub releases
             if: ${{ github.ref == 'refs/heads/main' }}
             uses: marvinpinto/action-automatic-releases@latest
